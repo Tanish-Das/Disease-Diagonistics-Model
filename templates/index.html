@@ -2,9 +2,25 @@
 <html>
 <head>
     <title>Disease Prediction</title>
+    <link rel="stylesheet" href="static/style.css">
+    <script src="https://unpkg.com/@lottiefiles/lottie-player@latest/dist/lottie-player.js"></script>
 </head>
-<body>
+<body class="light">
+
+    <!-- Theme Toggle Button -->
+    <button id="themeToggle">🌙</button>
+
     <h1>Disease Prediction System</h1>
+
+    <!-- Optional: Lottie animation on top -->
+    <div class="lottie-container">
+        <lottie-player src="https://assets10.lottiefiles.com/packages/lf20_usmfx6bp.json"
+                       background="transparent"
+                       speed="1"
+                       style="width: 120px; height: 120px;"
+                       loop autoplay></lottie-player>
+    </div>
+
     <form method="POST">
         <label>Select Symptoms:</label><br>
         {% for symptom in symptoms %}
@@ -14,13 +30,33 @@
     </form>
 
     {% if prediction %}
-        <h2>Predicted Disease: {{ prediction }}</h2>
-        <h3>Precautions:</h3>
-        <ul>
-            {% for p in precautions %}
-                <li>{{ p }}</li>
-            {% endfor %}
-        </ul>
+        <div class="result-card">
+            <h2>Predicted Disease: {{ prediction }}</h2>
+            <h3>Precautions:</h3>
+            <ul>
+                {% for p in precautions %}
+                    <li>{{ p }}</li>
+                {% endfor %}
+            </ul>
+            <!-- Animated feedback -->
+            <div class="lottie-container small">
+                <lottie-player src="https://assets2.lottiefiles.com/packages/lf20_jcikwtux.json"
+                               background="transparent"
+                               speed="1"
+                               style="width: 100px; height: 100px;"
+                               autoplay></lottie-player>
+            </div>
+        </div>
     {% endif %}
+
+    <script>
+      const toggleBtn = document.getElementById("themeToggle");
+      const body = document.body;
+      toggleBtn.onclick = () => {
+        body.classList.toggle("dark");
+        body.classList.toggle("light");
+        toggleBtn.textContent = body.classList.contains("dark") ? "☀️" : "🌙";
+      };
+    </script>
 </body>
 </html>

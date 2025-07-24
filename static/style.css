@@ -1,0 +1,137 @@
+/* Reset & Base */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Segoe UI", sans-serif;
+}
+
+body {
+  padding: 2rem;
+  min-height: 100vh;
+  background: linear-gradient(135deg, #f5f7fa, #c3cfe2);
+  color: #222;
+  transition: background 0.5s, color 0.5s;
+}
+
+/* Theme toggle button */
+#themeToggle {
+  position: fixed;
+  top: 15px;
+  right: 15px;
+  font-size: 1.5rem;
+  background: none;
+  border: none;
+  cursor: pointer;
+  z-index: 999;
+}
+
+/* Header */
+h1 {
+  text-align: center;
+  margin-bottom: 1rem;
+}
+
+/* Form */
+form {
+  max-width: 500px;
+  margin: auto;
+  background: rgba(255, 255, 255, 0.6);
+  backdrop-filter: blur(5px);
+  padding: 2rem;
+  border-radius: 12px;
+  box-shadow: 0 0 12px rgba(0, 0, 0, 0.1);
+}
+
+label {
+  font-weight: bold;
+  display: block;
+  margin-bottom: 0.5rem;
+}
+
+input[type="checkbox"] {
+  margin-right: 0.5rem;
+  transform: scale(1.2);
+  accent-color: #007bff;
+}
+
+input[type="submit"] {
+  margin-top: 1rem;
+  padding: 10px 20px;
+  font-weight: bold;
+  background: linear-gradient(to right, #00c6ff, #0072ff);
+  color: white;
+  border: none;
+  border-radius: 25px;
+  cursor: pointer;
+  transition: transform 0.3s, background 0.3s;
+}
+
+input[type="submit"]:hover {
+  transform: scale(1.05);
+}
+
+/* Result */
+.result-card {
+  max-width: 500px;
+  margin: 2rem auto;
+  background: #ffffffcc;
+  backdrop-filter: blur(6px);
+  padding: 1.5rem;
+  border-radius: 10px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
+  animation: slideUp 1s ease forwards;
+  text-align: center;
+}
+
+.result-card ul {
+  list-style: none;
+  padding-left: 0;
+  margin-top: 1rem;
+}
+
+.result-card li {
+  margin: 0.4rem 0;
+  background: #f0f0f0;
+  padding: 6px 12px;
+  border-radius: 6px;
+}
+
+/* Lottie styling */
+.lottie-container {
+  text-align: center;
+  margin: 1rem 0;
+}
+.lottie-container.small {
+  margin-top: 1rem;
+}
+
+/* Animation */
+@keyframes slideUp {
+  from {opacity: 0; transform: translateY(50px);}
+  to {opacity: 1; transform: translateY(0);}
+}
+
+/* Dark Theme */
+body.dark {
+  background: linear-gradient(135deg, #232526, #414345);
+  color: #eee;
+}
+
+body.dark form {
+  background: rgba(0, 0, 0, 0.4);
+  color: #fff;
+}
+
+body.dark .result-card {
+  background: rgba(255, 255, 255, 0.08);
+  color: #fff;
+}
+
+body.dark input[type="submit"] {
+  background: linear-gradient(to right, #f12711, #f5af19);
+}
+
+body.dark .result-card li {
+  background: rgba(255, 255, 255, 0.1);
+}
