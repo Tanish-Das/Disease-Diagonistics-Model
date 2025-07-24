@@ -2,17 +2,18 @@
 <html>
 <head>
     <title>Disease Prediction</title>
-    <link rel="stylesheet" href="static/style.css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
     <script src="https://unpkg.com/@lottiefiles/lottie-player@latest/dist/lottie-player.js"></script>
 </head>
 <body class="light">
 
-    <!-- Theme Toggle Button -->
     <button id="themeToggle">🌙</button>
 
     <h1>Disease Prediction System</h1>
 
-    <!-- Optional: Lottie animation on top -->
     <div class="lottie-container">
         <lottie-player src="https://assets10.lottiefiles.com/packages/lf20_usmfx6bp.json"
                        background="transparent"
@@ -22,23 +23,29 @@
     </div>
 
     <form method="POST">
-        <label>Select Symptoms:</label><br>
-        {% for symptom in symptoms %}
-            <input type="checkbox" name="symptoms" value="{{ symptom }}"> {{ symptom }}<br>
-        {% endfor %}
-        <br><input type="submit" value="Predict">
+        <label for="symptom-select">Search & Select Symptoms (min 3):</label><br>
+        <select id="symptom-select" name="symptoms" multiple="multiple" style="width: 100%;">
+            {% for symptom in symptoms %}
+                <option value="{{ symptom }}">{{ symptom }}</option>
+            {% endfor %}
+        </select>
+        <br><br>
+        <input type="submit" value="Predict">
     </form>
 
     {% if prediction %}
         <div class="result-card">
-            <h2>Predicted Disease: {{ prediction }}</h2>
+            <h2>Predicted Disease:</h2>
+            <p>{{ prediction }}</p>
+            {% if confidence %}
+                <p><strong>Confidence:</strong> {{ confidence }}%</p>
+            {% endif %}
             <h3>Precautions:</h3>
             <ul>
                 {% for p in precautions %}
                     <li>{{ p }}</li>
                 {% endfor %}
             </ul>
-            <!-- Animated feedback -->
             <div class="lottie-container small">
                 <lottie-player src="https://assets2.lottiefiles.com/packages/lf20_jcikwtux.json"
                                background="transparent"
@@ -46,6 +53,9 @@
                                style="width: 100px; height: 100px;"
                                autoplay></lottie-player>
             </div>
+            <p style="font-size: 0.85rem; margin-top: 1rem; color: #888;">
+                This is an AI-based prediction and may not be medically accurate. Please consult a healthcare professional for proper diagnosis.
+            </p>
         </div>
     {% endif %}
 
@@ -58,5 +68,15 @@
         toggleBtn.textContent = body.classList.contains("dark") ? "☀️" : "🌙";
       };
     </script>
+
+    <script>
+      $(document).ready(function () {
+        $('#symptom-select').select2({
+          placeholder: "Type to search and select symptoms",
+          allowClear: true
+        });
+      });
+    </script>
+
 </body>
 </html>
